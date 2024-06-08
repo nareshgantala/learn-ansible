@@ -1,7 +1,8 @@
 ---
 - name: Update app servers
   hosts: db
-  remote_user: root
+  remote_user: ubuntu
+  become: true
 
   tasks:
     - name: Install apache httpd  (state=present is optional)
