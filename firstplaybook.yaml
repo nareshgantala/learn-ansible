@@ -1,6 +1,6 @@
 ---
 - name: Update app servers
-  hosts: app
+  hosts: db
   remote_user: root
 
   tasks:
