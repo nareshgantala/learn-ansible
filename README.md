@@ -1,4 +1,4 @@
-Certainly! Here are the steps with specific instructions on where to run the commands:
+Here are the steps with specific instructions on where to run the commands:
 
 1. **Navigate to Your Repository:**
    Use the `cd` command to navigate to the root directory of your Git repository on the EC2 server. For example:
