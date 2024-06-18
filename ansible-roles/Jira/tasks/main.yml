@@ -4,7 +4,6 @@
     file: jira_credentials.yml
     name: jira_creds
   no_log: false
-  when: jira_operation == "fetch_credentials"
 
 - name: Create an issue
   community.general.jira:
@@ -20,7 +19,7 @@
     fields:
         customfield_10079: {"value": "A"}
   register: new_jira_issue
-  when: jira_issue is not defined 
+  when: jira_issue is not defined
 
 - name: Debug created issue
   debug:
@@ -37,9 +36,9 @@
     uri: '{{ jira_creds.jira_server }}'
     username: '{{ jira_creds.jira_user }}'
     password: '{{ jira_creds.jira_pass }}'
-    issue: '{{ new_jira_issue.meta.key }}'
+    issue: '{{ jira_issue }}'
     operation: comment
-  when: jira_operation == "comment_on_issue"
+  when: apache_restarted is defined and apache_restarted.changed
   register: commented_on_jira
 
 - name: Resolve the issue
@@ -54,4 +53,4 @@
       resolution:
         name: Done
       description: I am done! This is the last description I will ever give you.
-  when: jira_operation == "resolve_issue"
+  when: commented_on_jira is defined

@@ -3,11 +3,10 @@
   ansible.builtin.apt:
     name: apache2
     state: present
-  
 
 - name: restart apache2 service
   ansible.builtin.service:
     name: apache2
     state: restarted
   register: apache_restarted
-  when: activity == "restart"
+  when: new_jira_issue is defined
