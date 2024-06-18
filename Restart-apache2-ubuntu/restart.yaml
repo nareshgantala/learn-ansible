@@ -6,11 +6,7 @@
   roles:
     - Jira
     - restart_apache
-    
-- name: Set apache_restarted fact
-  set_fact:
-    apache_restarted: "{{ apache_restart_result.results[1] }}"
-  when: apache_restart_result is defined
+
   
 
    

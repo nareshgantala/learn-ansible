@@ -1,17 +1,12 @@
-# roles/restart_apache/tasks/main.yml
-- name: Ensure apache2 is installed
+---
+- name: ensure apache2 Install
   ansible.builtin.apt:
     name: apache2
     state: present
 
-- name: Restart apache2 service
-  service:
+- name: restart apache2 service
+  ansible.builtin.service:
     name: apache2
     state: restarted
   register: apache_restarted
-
-
-- name: Set apache_restarted fact globally
-  set_fact:
-    apache_restarted: "{{ apache_restarted }}"
-  when: apache_restarted.changed
+  when: new_jira_issue is defined

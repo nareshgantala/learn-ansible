@@ -1,4 +1,4 @@
-# roles/Jira/tasks/main.yml
+---
 - name: Include JIRA credentials
   include_vars:
     file: jira_credentials.yml
@@ -38,8 +38,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ jira_issue }}'
     operation: comment
-    comment: "Apache service has been restarted."
-  when: apache_restarted.changed
+  when: apache_restarted is defined and apache_restarted.changed
   register: commented_on_jira
 
 - name: Resolve the issue
