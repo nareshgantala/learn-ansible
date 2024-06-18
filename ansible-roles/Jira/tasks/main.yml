@@ -1,4 +1,9 @@
----
+- name: Include JIRA credentials
+  include_vars:
+    file: jira_credentials.yml
+    name: jira_creds
+  no_log: false
+
 - name: Create an issue
   community.general.jira:
     uri: '{{ server }}'
@@ -14,8 +19,4 @@
         customfield_13225: "test"
         customfield_12931: {"value": "Test"}
   register: issue
-- name: Restart apache2 on db servers
-  hosts: db 
-  remote_user: ubuntu
-  become: true
 

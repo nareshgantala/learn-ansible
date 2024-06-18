@@ -1,0 +1,9 @@
+  - name: ensure apache2 Install
+    ansible.builtin.apt:
+      name: apache2
+      state: present
+
+  - name: restart apache2 service
+    service:
+      name: apache2
+      state: restarted 
