@@ -1,7 +1,7 @@
 ---
 - name: Include JIRA credentials
   include_vars:
-    file: jira_credentials.yml
+    file: ../ansiblie-roles/jira/vars/jira_credentials.yml
     name: jira_creds
   no_log: false
 
