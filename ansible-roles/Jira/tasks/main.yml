@@ -1,10 +1,4 @@
 ---
-- name: Include JIRA credentials
-  include_vars:
-    file: jira_credentials.yml
-    name: jira_creds
-  no_log: false
-
 - name: Create an issue
   community.general.jira:
     uri: '{{ jira_creds.jira_server }}'
