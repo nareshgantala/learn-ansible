@@ -21,7 +21,7 @@
   tasks:
     - name: restart apache2 service
       ansible.builtin.include_role:
-        name: restart_apache
+        name: restart
       when: new_jira_issue is defined
 
 - name: Comment and resolve JIRA issue
