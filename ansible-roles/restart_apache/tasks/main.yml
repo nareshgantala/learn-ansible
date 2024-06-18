@@ -10,6 +10,7 @@
     state: restarted
   register: apache_restarted
 
+
 - name: Set apache_restarted fact globally
   set_fact:
     apache_restarted: "{{ apache_restarted }}"
