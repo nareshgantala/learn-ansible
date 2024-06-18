@@ -4,8 +4,9 @@
   remote_user: ubuntu
   become: true
   roles:
-   - Jira
-   - restart_apache
+    - Jira
+    - restart_apache
+  comment: apache restrated 
 
    
 
