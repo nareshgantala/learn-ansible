@@ -1,4 +1,15 @@
 ---
+- name: Include JIRA credentials
+  include_vars:
+    file: jira_credentials.yml
+    name: jira_creds
+  no_log: false
+
+- name: create issue
+  roles:
+    - role: Jira
+  when: jira_issue is not defined
+
 - name: restart apache
   hosts: db
   remote_user: ubuntu

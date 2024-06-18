@@ -40,6 +40,7 @@
     operation: comment
     comment: '{{comment}}'
   register: commented_on_jira
+  when: apache_restarted is defined and apache_restarted.changed
 
 - name: Resolve the issue
   community.general.jira:
