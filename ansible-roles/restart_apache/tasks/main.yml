@@ -1,11 +1,16 @@
 # roles/restart_apache/tasks/main.yml
-- name: ensure apache2 Install
+- name: Ensure apache2 is installed
   ansible.builtin.apt:
     name: apache2
     state: present
 
-- name: restart apache2 service
+- name: Restart apache2 service
   service:
     name: apache2
     state: restarted
   register: apache_restarted
+
+- name: Set apache_restarted fact globally
+  set_fact:
+    apache_restarted: "{{ apache_restarted }}"
+  when: apache_restarted.changed

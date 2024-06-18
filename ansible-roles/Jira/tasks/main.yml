@@ -1,3 +1,4 @@
+# roles/Jira/tasks/main.yml
 - name: Include JIRA credentials
   include_vars:
     file: jira_credentials.yml
@@ -25,12 +26,15 @@
     msg: "Fetch {{ new_jira_issue }}"
   when: new_jira_issue is defined
 
-
 - name: Set jira_issue fact to the newly created issue key
   set_fact:
     jira_issue: '{{ new_jira_issue.meta.key }}'
   when: jira_issue is not defined
 
+- name: Wait for Apache restart fact
+  wait_for:
+    timeout: 300
+  when: new_jira_issue is defined and not apache_restarted|default(false)
 
 - name: Comment on JIRA issue
   community.general.jira:
@@ -39,6 +43,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ jira_issue }}'
     operation: comment
+    comment: "Apache service has been restarted."
   when: apache_restarted is defined and apache_restarted.changed
   register: commented_on_jira
 
@@ -54,4 +59,4 @@
       resolution:
         name: Done
       description: I am done! This is the last description I will ever give you.
-    when: commented_on_jira is defined
+  when: commented_on_jira is defined
