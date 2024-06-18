@@ -4,4 +4,5 @@
     name: apache2
     state: restarted
   register: apache_restarted
+  ignore_errors: true
   when: new_jira_issue is defined
