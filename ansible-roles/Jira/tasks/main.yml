@@ -22,7 +22,7 @@
 
 - name: Debug created issue
   debug:
-    msg: {{ new_jira_issue }}
+    msg: "Fetch {{ new_jira_issue }}"
   when: new_jira_issue is defined
 
 
