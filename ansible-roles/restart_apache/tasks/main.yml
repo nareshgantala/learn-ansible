@@ -1,11 +1,11 @@
-  - name: ensure apache2 Install
-    ansible.builtin.apt:
-      name: apache2
-      state: present
+# roles/restart_apache/tasks/main.yml
+- name: ensure apache2 Install
+  ansible.builtin.apt:
+    name: apache2
+    state: present
 
-  - name: restart apache2 service
-    service:
-      name: apache2
-      state: restarted
-    register: apache_restarted
-    when: new_jira_issue is defined
+- name: restart apache2 service
+  service:
+    name: apache2
+    state: restarted
+  register: apache_restarted
