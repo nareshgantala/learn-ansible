@@ -6,7 +6,7 @@
   roles:
     - Jira
     - restart_apache
-  comment: apache restrated 
+  
 
    
 
