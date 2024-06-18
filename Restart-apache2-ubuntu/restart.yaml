@@ -1,21 +1,11 @@
 ---
-- name: Create an issue
-  community.general.jira:
-    uri: '{{ server }}'
-    username: '{{ user }}'
-    password: '{{ pass }}'
-    project: ANS
-    operation: create
-    summary: Example Issue
-    description: Created using Ansible
-    issuetype: Task
-  args:
-    fields:
-        customfield_13225: "test"
-        customfield_12931: {"value": "Test"}
-  register: issue
 - name: Restart apache2 on db servers
   hosts: db 
   remote_user: ubuntu
   become: true
+  roles:
+   - Jira
+   - restart_apache
+
+   
 
