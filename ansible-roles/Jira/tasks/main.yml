@@ -23,7 +23,7 @@
 
 - name: Set jira_issue fact to the newly created issue key
   set_fact:
-    jira_issue: "{{ new_jira_issue.issue }}"
+    jira_issue: "{{ new_jira_issue.key }}"
   when: jira_issue is not defined
 
 
