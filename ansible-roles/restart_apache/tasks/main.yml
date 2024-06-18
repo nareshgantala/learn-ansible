@@ -1,12 +1,12 @@
 ---
-- name: ensure apache2 Install
+- name: Ensure apache2 is installed
   ansible.builtin.apt:
     name: apache2
     state: present
 
-- name: restart apache2 service
+- name: Restart apache2 service
   ansible.builtin.service:
     name: apache2
     state: restarted
   register: apache_restarted
-
+  when: new_jira_issue is defined
