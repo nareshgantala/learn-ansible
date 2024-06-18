@@ -38,7 +38,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ jira_issue }}'
     operation: comment
-  when: apache_restarted is defined and apache_restarted.changed
+    comment: '{{comment}}'
   register: commented_on_jira
 
 - name: Resolve the issue

@@ -9,4 +9,4 @@
     name: apache2
     state: restarted
   register: apache_restarted
-  when: new_jira_issue is defined
+

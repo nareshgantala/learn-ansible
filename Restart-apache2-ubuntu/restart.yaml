@@ -1,8 +1,14 @@
 ---
-- name: Restart apache2 on db servers
-  hosts: db 
+- name: restart apache
+  hosts: db
   remote_user: ubuntu
   become: true
   roles:
-    - Jira
-    - restart_apache
+    - role: restart_apache
+  when: new_jira_issue is defined
+
+- name: comment on issue
+  roles:
+    - role: Jira
+  comment: apache restarted
+  when: apache_restarted is defined and apache_restarted.changed
