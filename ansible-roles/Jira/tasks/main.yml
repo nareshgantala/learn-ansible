@@ -16,7 +16,7 @@
     issuetype: Task
   args:
     fields:
-        customfield_10079: "A"
+        customfield_10079: {"value": "A"}
   register: new_jira_issue
   when: jira_issue is not defined
 
