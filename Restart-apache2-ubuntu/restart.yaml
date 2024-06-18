@@ -6,25 +6,30 @@
   
   
 - name: fetch jira creds
+  hosts: localhost
   roles:
     - role: Jira
       jira_operation: "fetch_credentials"
 
-- name: create issue 
+- name: create issue
+  hosts: localhost
   roles:
     - role: Jira
 
-- name: restart service 
+- name: restart service
+  hosts: localhost
   roles:
     - role: restart_apache    
       activity: "restart"
     
 - name: comment on issue
+  hosts: localhost
   roles: 
     - role: Jira
       jira_operation: "comment_on_issue"
 
 - name: resolve issue
+  hosts: localhost
   roles: 
     - role: Jira
       jira_operation: "resolve_issue"
