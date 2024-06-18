@@ -1,9 +1,4 @@
 ---
-- name: Ensure apache2 is installed
-  ansible.builtin.apt:
-    name: apache2
-    state: present
-
 - name: Restart apache2 service
   ansible.builtin.service:
     name: apache2
