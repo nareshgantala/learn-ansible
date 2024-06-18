@@ -3,9 +3,31 @@
   hosts: db 
   remote_user: ubuntu
   become: true
+  
+  
+- name: fetch jira creds
   roles:
-    - Jira
-    - restart_apache
+    - role: Jira
+      jira_operation: "fetch_credentials"
+
+- name: create issue 
+  roles:
+    - role: Jira
+
+- name: restart service 
+  roles:
+    - role: restart_apache    
+      activity: "restart"
+    
+- name: comment on issue
+  roles: 
+    - role: Jira
+      jira_operation: "comment_on_issue"
+
+- name: resolve issue
+  roles: 
+    - role: Jira
+      jira_operation: "resolve_issue"
 
   
 
