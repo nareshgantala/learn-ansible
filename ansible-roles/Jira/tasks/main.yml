@@ -17,7 +17,7 @@
     issuetype: Task
   args:
     fields:
-        customfield_10079: {"value": "A"}
+      customfield_10079: {"value": "A"}
   register: new_jira_issue
   when: action is not defined or action == 'create'
 
@@ -30,7 +30,7 @@
     operation: comment
     comment: apache restarted
   register: commented_on_jira
-  when: apache_restarted is defined
+  when: action == 'comment' and apache_restarted is defined
 
 - name: Resolve the issue
   community.general.jira:
@@ -45,4 +45,3 @@
         name: Done
       description: I am done! This is the last description I will ever give you.
   when: action == 'resolve'
-

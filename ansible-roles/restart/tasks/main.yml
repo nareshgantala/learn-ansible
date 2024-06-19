@@ -5,4 +5,19 @@
     state: restarted
   register: apache_restarted
   ignore_errors: true
-  when: new_jira_issue is defined
+
+- name: Include Jira role to comment on issue
+  include_role:
+    name: jira
+  vars:
+    action: comment
+    apache_restarted: apache_restarted
+  when: apache_restarted.changed
+
+- name: Include Jira role to resolve issue
+  include_role:
+    name: jira
+  vars:
+    action: resolve
+    jira_issue: '{{ new_jira_issue.meta.key }}'
+  when: apache_restarted.changed

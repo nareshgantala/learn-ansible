@@ -5,8 +5,7 @@
   tasks:
     - name: create issue
       ansible.builtin.include_role:
-        name: Jira
-      when: jira_issue is not defined
+        name: jira
 
 - name: Restart apache2 on db servers
   hosts: db
@@ -16,23 +15,3 @@
     - name: restart apache2 service
       ansible.builtin.include_role:
         name: restart
-      when: new_jira_issue is defined
-
-- name: Comment and resolve JIRA issue
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: comment on issue
-      ansible.builtin.include_role:
-        name: Jira
-      vars:
-        action: comment
-      when: apache_restarted is defined and apache_restarted.changed
-
-    - name: resolve the issue
-      ansible.builtin.include_role:
-        name: Jira
-      vars:
-        action: resolve
-      when: commented_on_jira is defined
-
