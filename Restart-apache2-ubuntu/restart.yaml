@@ -3,12 +3,6 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Include JIRA credentials
-      include_vars:
-        file: jira_credentials.yml
-        name: jira_creds
-      no_log: false
-
     - name: create issue
       ansible.builtin.include_role:
         name: Jira
