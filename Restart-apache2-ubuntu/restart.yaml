@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   roles:
-    - role: JIRA
+    - role: Jira
       vars:
         action: comment
         comment: "Starting Restart process"
