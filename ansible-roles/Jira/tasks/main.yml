@@ -39,19 +39,18 @@
 
 - name: install apache2
   include_role:
-    name: restart
+    name: install
   vars:
     action: install
   register: install_apache2
   when: issue_key is defined
-  
 
 - name: Include restart role to restart service
   include_role:
     name: restart
   vars:
     action: restart
-  when: install_apache2 is defined
+  register: apache_restarted
 
 - name: Comment on JIRA issue
   community.general.jira:
@@ -60,7 +59,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ issue_key }}'
     operation: comment
-    comment: '{{ comment }}'
+    comment: apache restarted
   register: commented_on_jira
   when: action == 'comment' and apache_restarted is defined
 

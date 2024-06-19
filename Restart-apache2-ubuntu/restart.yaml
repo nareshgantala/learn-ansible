@@ -14,4 +14,13 @@
   become: true
   roles:
     - role: restart
+
+- name: Include JIRA credentials and create issue
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: Jira
+      vars:
+        action: comment
+        comment: "Starting Restart process"
       
