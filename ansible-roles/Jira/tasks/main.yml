@@ -26,12 +26,21 @@
     issue_key: "{{ new_jira_issue.meta.key if jira_issue is not defined else jira_issue }}"
   when: new_jira_issue.meta is defined or jira_issue is defined
 
+- name: install apache2
+  include_role:
+    name: restart
+  vars:
+    action: install
+  register: install_apache2
+  when: issue_key is defined
+  
+
 - name: Include restart role to restart service
   include_role:
     name: restart
   vars:
     action: restart
-  when: issue_key is defined
+  when: install_apache2 is defined
 
 - name: Comment on JIRA issue
   community.general.jira:

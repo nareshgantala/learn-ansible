@@ -1,4 +1,11 @@
 ---
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+  ignore_errors: true
+  when: action == "install"
+
 - name: Restart apache2 service
   ansible.builtin.service:
     name: apache2
