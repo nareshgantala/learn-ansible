@@ -31,7 +31,6 @@
     name: restart
   vars:
     action: restart
-    issue_key: "{{ issue_key }}"
   when: issue_key is defined
 
 - name: Comment on JIRA issue
