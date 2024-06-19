@@ -5,7 +5,7 @@
   tasks:
     - name: create issue
       ansible.builtin.include_role:
-        name: jira
+        name: Jira
 
 - name: Restart apache2 on db servers
   hosts: db

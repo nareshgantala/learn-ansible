@@ -9,7 +9,7 @@
 
 - name: Include Jira role to comment on issue
   include_role:
-    name: jira
+    name: Jira
   vars:
     action: comment
     apache_restarted: apache_restarted
@@ -17,7 +17,7 @@
 
 - name: Include Jira role to resolve issue
   include_role:
-    name: jira
+    name: Jira
   vars:
     action: resolve
     jira_issue: '{{ new_jira_issue.meta.key }}'
