@@ -21,6 +21,14 @@
   register: new_jira_issue
   when: action is not defined or action == 'create'
 
+- name: Include restart role to restart service
+  include_role:
+    name: restart
+  vars:
+    action: restart
+    new_jira_issue: new_jira_issue
+  when: new_jira_issue.changed
+
 - name: Comment on JIRA issue
   community.general.jira:
     uri: '{{ jira_creds.jira_server }}'

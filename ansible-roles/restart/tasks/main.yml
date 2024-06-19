@@ -5,6 +5,7 @@
     state: restarted
   register: apache_restarted
   ignore_errors: true
+  when: action == 'restart'
 
 - name: Include Jira role to comment on issue
   include_role:
