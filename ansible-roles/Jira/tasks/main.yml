@@ -39,7 +39,7 @@
 
 - name: install apache2
   include_role:
-    name: install
+    name: restart
   vars:
     action: install
   register: install_apache2
