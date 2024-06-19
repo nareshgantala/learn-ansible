@@ -5,7 +5,7 @@
     name: apache2
     state: present
   ignore_errors: true
-  when: action == "install"
+  when: action == 'install'
 
 - name: Restart apache2 service
   become: true
@@ -14,7 +14,7 @@
     state: restarted
   register: apache_restarted
   ignore_errors: true
-  when: action == "restart"
+  when: action == 'restart'
 
 - name: Include Jira role to comment on issue
   include_role:
