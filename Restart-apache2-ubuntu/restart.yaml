@@ -4,7 +4,9 @@
   gather_facts: false
   roles:
     - role: JIRA
-      comment: "Starting Restart process"
+      vars:
+        action: comment
+        comment: "Starting Restart process"
   when: jira_issue is defined
 
 - name: Restart apache2 on db servers
