@@ -26,6 +26,17 @@
     issue_key: "{{ new_jira_issue.meta.key if jira_issue is not defined else jira_issue }}"
   when: new_jira_issue.meta is defined or jira_issue is defined
 
+- name: Comment on JIRA issue
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    issue: '{{ issue_key }}'
+    operation: comment
+    comment: '{{ comment }}'
+  register: commented_on_jira
+  when: action == 'comment' 
+
 - name: install apache2
   include_role:
     name: restart

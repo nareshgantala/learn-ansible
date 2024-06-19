@@ -1,5 +1,6 @@
 ---
 - name: Install Apache
+  become: true
   apt:
     name: apache2
     state: present
@@ -7,6 +8,7 @@
   when: action == "install"
 
 - name: Restart apache2 service
+  become: true
   ansible.builtin.service:
     name: apache2
     state: restarted
