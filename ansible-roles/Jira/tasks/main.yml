@@ -40,7 +40,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ issue_key }}'
     operation: comment
-    comment: apache restarted
+    comment: '{{ comment }}'
   register: commented_on_jira
   when: action == 'comment' and apache_restarted is defined
 

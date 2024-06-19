@@ -2,10 +2,10 @@
 - name: Include JIRA credentials and create issue
   hosts: localhost
   gather_facts: false
-  tasks:
-    - name: create issue
-      ansible.builtin.include_role:
-        name: Jira
+  roles:
+    - role: JIRA
+      comment: "Starting Restart process"
+  when: jira_issue is defined
 
 - name: Restart apache2 on db servers
   hosts: db
