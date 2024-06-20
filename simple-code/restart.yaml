@@ -5,13 +5,14 @@
     - name: assign_user
       prompt: "Enter the username of the assignee for the new issue"
       private: false
-  register: assign_user
   vars: 
     jira_assignee: "{{ assign_user }}"
   tasks:
     - name: Debug assign_user variable
       debug:
-        var: assign_user
+        var: 
+          - assign_user
+          - jira_assignee
 
     - name: set fact for new issue
       set_fact:
