@@ -15,7 +15,6 @@
     summary: Example Issue
     description: Created using Ansible
     issuetype: '[System] Service request'
-    priority: High
   args:
     fields:
       customfield_10079: {"value": "A"}    
