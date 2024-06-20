@@ -17,7 +17,7 @@
     issuetype: Task
   args:
     fields:
-      customfield_10079: {"value": "A"}
+      customfield_10079: {"value": "A"}    
   register: new_jira_issue
   when: jira_issue is not defined
 
@@ -32,10 +32,8 @@
     username: '{{ jira_creds.jira_user }}'
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ issue_key }}'
-    operation: update
-    fields:
-      assignee: 
-        name: '{{ jira_assignee }}'
+    operation: edit
+    assignee: '{{ jira_assignee }}'
   when: issue_key is defined and jira_issue is not defined and jira_assignee is defined
 
 - name: Comment on JIRA issue
