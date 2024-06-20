@@ -20,6 +20,7 @@
     fields:
       customfield_10079: {"value": "A"}    
   register: new_jira_issue
+  wait: true
   when: jira_issue is not defined and new_jira_issue.meta.key is not defined
 
 - name: Set JIRA issue key to new or existing issue
@@ -35,6 +36,7 @@
     issue: '{{ issue_key }}'
     operation: edit
     assignee: '{{ jira_assignee }}'
+  when: new_jira_issue.meta.key is defined
 
 
 - name: Comment on JIRA issue
