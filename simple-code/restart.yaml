@@ -1,24 +1,4 @@
 ---
-- name: Prompt for assignee if new issue created
-  hosts: localhost
-  tasks:     
-    - name: Prompt assign_user
-      vars_prompt:
-        - name: assign_user
-          prompt: "Enter the username of the assignee for the new issue"
-          private: false
-      when: jira_issue is not defined 
-
-    - name: Set default assignee
-      set_fact:
-        assign_user: "{{ assign_user }}"
-      when: assign_user is not defined
-
-    - name: set fact for new issue
-      set_fact:
-        new_issue_created: true
-      when: jira_issue is not defined 
-
 - name: Include JIRA credentials and restartStart Comment
   hosts: localhost
   gather_facts: false
@@ -27,7 +7,6 @@
       vars:
         action: restartStart
         comment: "Starting Restart process"
-        jira_assignee: "{{ assign_user }}"
 
 - name: Restart apache2 on app servers
   hosts: app
