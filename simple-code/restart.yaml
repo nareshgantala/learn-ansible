@@ -19,6 +19,7 @@
       vars:
         action: restartStart
         comment: "Starting Restart process"
+        assign_user: "{{ assign_user }}"
 
 - name: Restart apache2 on app servers
   hosts: app
