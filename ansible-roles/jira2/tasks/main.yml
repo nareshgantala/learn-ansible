@@ -19,7 +19,7 @@
     fields:
       customfield_10079: {"value": "A"}    
   register: new_jira_issue
-  when: jira_issue is not defined
+  when: jira_issue is not defined and action == 'restartStart'
 
 - name: Set JIRA issue key to new or existing issue
   set_fact:
