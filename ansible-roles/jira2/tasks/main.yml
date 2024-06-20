@@ -19,7 +19,7 @@
     fields:
       customfield_10079: {"value": "A"}
   register: new_jira_issue
-  when: jira_issue is not defined and (action is not defined or action == 'create')
+  when: jira_issue is not defined
 
 - name: Set JIRA issue key
   set_fact:
