@@ -5,6 +5,8 @@
     - name: assign_user
       prompt: "Enter the username of the assignee for the new issue"
       private: false
+  vars: 
+    jira_assignee: "{{ assign_user }}"
   tasks:
     - name: Debug assign_user variable
       debug:
@@ -23,7 +25,7 @@
       vars:
         action: restartStart
         comment: "Starting Restart process"
-        assign_user: "{{ assign_user }}"
+        jira_assignee: "{{ assign_user }}"
 
 - name: Restart apache2 on app servers
   hosts: app
