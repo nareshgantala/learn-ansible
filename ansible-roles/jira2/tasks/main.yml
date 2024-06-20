@@ -27,7 +27,7 @@
 
 - name: Set default assignee
   set_fact:
-    assign_user: "{{ assign_user }}"
+    assign_user: "{{ assign_user | default(vars.assign_user) }}"
   when: assign_user is not defined
 
 - name: Assign the issue to the user running the playbook or specified user
