@@ -15,7 +15,6 @@
     summary: Example Issue
     description: Created using Ansible
     issuetype: '[System] Service request'
-    labels: created_by_ansible
   args:
     fields:
       customfield_10079: {"value": "A"}    
