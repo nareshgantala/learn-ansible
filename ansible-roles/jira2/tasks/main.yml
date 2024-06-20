@@ -5,7 +5,7 @@
     assign_user: "{{ assign_user }}"
     name: jira_creds
 
-  no_log: true
+  no_log: false
 
 - name: Create an issue if jira_issue is not defined
   community.general.jira:
