@@ -25,8 +25,7 @@
   set_fact:
     issue_key: "{{ jira_issue if jira_issue is defined else new_jira_issue.meta.key }}"
 
-    
-
+ 
 - name: Assign the issue to the user running the playbook or specified user
   community.general.jira:
     uri: '{{ jira_creds.jira_server }}'
