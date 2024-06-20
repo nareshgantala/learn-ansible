@@ -6,6 +6,10 @@
       prompt: "Enter the username of the assignee for the new issue"
       private: false
   tasks:
+    - name: Debug assign_user variable
+      debug:
+        var: assign_user
+
     - name: set fact for new issue
       set_fact:
         new_issue_created: true
