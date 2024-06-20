@@ -2,9 +2,7 @@
 - name: Include JIRA credentials
   include_vars:
     file: jira_credentials.yml
-    assign_user: "{{ assign_user }}"
     name: jira_creds
-
   no_log: false
 
 - name: Create an issue if jira_issue is not defined
