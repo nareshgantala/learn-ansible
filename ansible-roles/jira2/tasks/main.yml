@@ -27,6 +27,15 @@
     issue_key: "{{ jira_issue if jira_issue is defined else new_jira_issue.meta.key }}"
   when: jira_issue is defined or new_jira_issue.meta.key is defined
 
+- name: Assign an issue using free-form fields
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    issue: '{{ issue_key }}'
+    operation: edit
+    assignee: '{{ jira_assignee }}'
+
 
 - name: Comment on JIRA issue
   community.general.jira:
