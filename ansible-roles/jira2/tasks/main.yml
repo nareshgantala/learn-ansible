@@ -1,80 +1,68 @@
 ---
-- name: Handle JIRA issues
-  hosts: localhost
-  gather_facts: false
-  vars_prompt:
-    - name: assign_user
-      prompt: "Enter the username of the assignee for the new issue"
-      private: false
-      when: jira_issue is not defined
+- name: Include JIRA credentials
+  include_vars:
+    file: jira_credentials.yml
+    name: jira_creds
+  no_log: true
 
-  tasks:
-    - name: Include JIRA credentials
-      include_vars:
-        file: jira_credentials.yml
-        name: jira_creds
-      no_log: false
+- name: Create an issue if jira_issue is not defined
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    project: GP
+    operation: create
+    summary: Example Issue
+    description: Created using Ansible
+    issuetype: Task
+  args:
+    fields:
+      customfield_10079: {"value": "A"}
+  register: new_jira_issue
+  when: jira_issue is not defined
 
-    - name: Create an issue if jira_issue is not defined
-      community.general.jira:
-        uri: '{{ jira_creds.jira_server }}'
-        username: '{{ jira_creds.jira_user }}'
-        password: '{{ jira_creds.jira_pass }}'
-        project: GP
-        operation: create
-        summary: Example Issue
-        description: Created using Ansible
-        issuetype: Task
-      args:
-        fields:
-          customfield_10079: {"value": "A"}
-      register: new_jira_issue
-      when: jira_issue is not defined
-      tags: create_issue
+- name: Set JIRA issue key to new or existing issue
+  set_fact:
+    issue_key: "{{ jira_issue if jira_issue is defined else new_jira_issue.meta.key }}"
 
-    - name: Set fact to indicate new issue creation
-      set_fact:
-        create_new_issue: true
-      when: new_jira_issue is defined and new_jira_issue.meta.key is defined
+- name: Set default assignee
+  set_fact:
+    assign_user: "{{ assign_user }}"
+  when: assign_user is not defined
 
-    - name: Set JIRA issue key
-      set_fact:
-        issue_key: "{{ new_jira_issue.meta.key if jira_issue is not defined else jira_issue }}"
-      when: new_jira_issue.meta is defined or jira_issue is defined
+- name: Assign the issue to the user running the playbook or specified user
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    issue: '{{ issue_key }}'
+    operation: update
+    fields:
+      assignee:
+        name: '{{ assign_user }}'
+  when: issue_key is defined
 
-    - name: Assign the new issue to the specified user
-      community.general.jira:
-        uri: '{{ jira_creds.jira_server }}'
-        username: '{{ jira_creds.jira_user }}'
-        password: '{{ jira_creds.jira_pass }}'
-        issue: '{{ issue_key }}'
-        operation: update
-        fields:
-          assignee:
-            name: '{{ assign_user }}'
-      when: new_jira_issue.meta is defined
+- name: Comment on JIRA issue
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    issue: '{{ issue_key }}'
+    operation: comment
+    comment: '{{ comment }}'
+  register: commented_on_jira
+  when: action == 'restartStart' or action == 'restartComplete'
 
-    - name: Comment on JIRA issue
-      community.general.jira:
-        uri: '{{ jira_creds.jira_server }}'
-        username: '{{ jira_creds.jira_user }}'
-        password: '{{ jira_creds.jira_pass }}'
-        issue: '{{ issue_key }}'
-        operation: comment
-        comment: '{{ comment }}'
-      register: commented_on_jira
-      when: action == 'restartStart' or action == 'restartComplete'
-
-    - name: Resolve the issue
-      community.general.jira:
-        uri: '{{ jira_creds.jira_server }}'
-        username: '{{ jira_creds.jira_user }}'
-        password: '{{ jira_creds.jira_pass }}'
-        issue: '{{ issue_key }}'
-        operation: transition
-        status: Done
-        fields:
-          resolution:
-            name: Done
-          description: I am done! This is the last description I will ever give you.
-      when: action == 'resolve'
+- name: Resolve the issue
+  community.general.jira:
+    uri: '{{ jira_creds.jira_server }}'
+    username: '{{ jira_creds.jira_user }}'
+    password: '{{ jira_creds.jira_pass }}'
+    issue: '{{ issue_key }}'
+    operation: transition
+    status: Done
+    fields:
+      resolution:
+        name: Done
+      description: I am done! This is the last description I will ever give you.
+  when: action == 'resolve'

@@ -1,4 +1,10 @@
 ---
+- name: Prompt for assignee if new issue created
+  vars_prompt:
+    - name: assign_user
+      prompt: "Enter the username of the assignee for the new issue"
+  when: jira_issue is not defined
+
 - name: Include JIRA credentials and restartStart Comment
   hosts: localhost
   gather_facts: false
