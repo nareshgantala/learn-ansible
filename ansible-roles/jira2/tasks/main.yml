@@ -28,7 +28,7 @@
 
 - name: Set default assignee
   set_fact:
-    assign_user: "{{ ansible_user }}"
+    assign_user: "{{ ansible_user_id }}"
   when: assign_user is not defined
 
 - name: Assign the issue to the user running the playbook or specified user
