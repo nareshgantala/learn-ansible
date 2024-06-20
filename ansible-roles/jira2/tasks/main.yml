@@ -36,7 +36,7 @@
     operation: update
     fields:
       assignee: 
-        name: '{{ jira_assigneer }}'
+        name: '{{ jira_assignee }}'
   when: issue_key is defined and jira_issue is not defined
 
 - name: Comment on JIRA issue
