@@ -8,8 +8,8 @@
         action: restartStart
         comment: "Starting Restart process"
 
-- name: Restart apache2 on db servers
-  hosts: db
+- name: Restart apache2 on app servers
+  hosts: app
   remote_user: ubuntu
   become: true
   roles:
