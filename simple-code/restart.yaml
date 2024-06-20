@@ -1,11 +1,11 @@
 ---
-- name: Include JIRA credentials and create issue
+- name: Include JIRA credentials and restartStart Comment
   hosts: localhost
   gather_facts: false
   roles:
-    - role: Jira
+    - role: jira2
       vars:
-        action: comment
+        action: restartStart
         comment: "Starting Restart process"
 
 - name: Restart apache2 on db servers
@@ -13,14 +13,16 @@
   remote_user: ubuntu
   become: true
   roles:
-    - role: restart
+    - role: restart2
+      vars:
+        action: restartApache2
 
-- name: Include JIRA credentials and create issue
+- name: Include JIRA credentials and restartComplete
   hosts: localhost
   gather_facts: false
   roles:
-    - role: Jira
+    - role: jira2
       vars:
-        action: comment
-        comment: "Starting Restart process"
+        action: restartComplte
+        comment: "Restart has been completed"
       
