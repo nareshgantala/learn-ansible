@@ -26,12 +26,13 @@
     issue_key: "{{ new_jira_issue.meta.key if jira_issue is not defined else jira_issue }}"
   when: new_jira_issue.meta is defined or jira_issue is defined
 
-- name: Set default assignee
-  set_fact:
-    assign_user: "{{ ansible_user_id }}"
-  when: assign_user is not defined
+- name: Prompt for assignee if new issue created
+  vars_prompt:
+    - name: assign_user
+      prompt: "Enter the username of the assignee for the new issue"
+  when: new_jira_issue.meta is defined
 
-- name: Assign the issue to the user running the playbook or specified user
+- name: Assign the new issue to the specified user
   community.general.jira:
     uri: '{{ jira_creds.jira_server }}'
     username: '{{ jira_creds.jira_user }}'
@@ -52,7 +53,7 @@
     operation: comment
     comment: '{{ comment }}'
   register: commented_on_jira
-  when: action == 'restartStart' or action == 'restartComplte'
+  when: action == 'restartStart' or action == 'restartComplete'
 
 - name: Resolve the issue
   community.general.jira:
@@ -67,4 +68,3 @@
         name: Done
       description: I am done! This is the last description I will ever give you.
   when: action == 'resolve'
-
