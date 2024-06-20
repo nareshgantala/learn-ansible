@@ -3,6 +3,7 @@
   vars_prompt:
     - name: assign_user
       prompt: "Enter the username of the assignee for the new issue"
+      private: false
   tasks:
     - name: set fact for new issue
       set_fact:
