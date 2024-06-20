@@ -24,6 +24,11 @@
 - name: Set JIRA issue key to new or existing issue
   set_fact:
     issue_key: "{{ jira_issue if jira_issue is defined else new_jira_issue.meta.key }}"
+    
+- name: Debug assign_user variable
+  debug:
+    var: assign_user
+
 
 - name: Set default assignee
   set_fact:
