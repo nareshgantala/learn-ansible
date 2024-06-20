@@ -2,7 +2,9 @@
 - name: Include JIRA credentials
   include_vars:
     file: jira_credentials.yml
+    assign_user: "{{ assign_user }}"
     name: jira_creds
+
   no_log: true
 
 - name: Create an issue if jira_issue is not defined
@@ -25,14 +27,10 @@
   set_fact:
     issue_key: "{{ jira_issue if jira_issue is defined else new_jira_issue.meta.key }}"
     
-- name: Debug assign_user variable
-  debug:
-    var: assign_user
-
 
 - name: Set default assignee
   set_fact:
-    assign_user: "{{ assign_user | default(vars.assign_user) }}"
+    assign_user: "{{ assign_user }}"
   when: assign_user is not defined
 
 - name: Assign the issue to the user running the playbook or specified user
