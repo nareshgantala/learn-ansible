@@ -13,4 +13,7 @@
       image_id: {{ item }}
       tags:
         Environment: Testing
-    loops: "ami-08a0d1e16fc3f61ea"
+    loop: 
+      - "ami-08a0d1e16fc3f61ea"
+      - "ami-04b70fa74e45c3917"
+      - "ami-04b70fa74e45c3917"
