@@ -16,4 +16,4 @@
     loop: 
       - {image_id: 'ami-08a0d1e16fc3f61ea', name: 'instance-a'}
       - {image_id: 'ami-04b70fa74e45c3917', name: 'instance-b'}
-      - {image_id: 'ami-04b70fa74e45c3917', name: 'instance-b'}
+      - {image_id: 'ami-04b70fa74e45c3917', name: 'instance-c'}
