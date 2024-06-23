@@ -1,7 +1,2 @@
 --- 
 - hosts: localhost
-
-  tasks:
-  - name: shutdown ec2 instances
-    debug:
-      vars: ansible_facts
