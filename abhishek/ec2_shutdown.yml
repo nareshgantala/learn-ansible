@@ -3,6 +3,11 @@
 
 
   tasks:
-  - name: shutdown ec2 instances
+  - name: debug ec2 instances
     ansible.builtin.debug:
-      msg: ansible_facts
+      var: ansible_facts
+
+  - name: shutdown ec2 instances
+    command: /sbin/shutdown -t now
+    when: 
+     ansible_facts['os_family'] == "Debian"
