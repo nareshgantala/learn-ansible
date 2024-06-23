@@ -5,15 +5,15 @@
   tasks:
   - name: start an instance with a public IP address
     amazon.aws.ec2_instance:
-      name: "public-compute-instance"
+      name: "{{ item.name }}"
       instance_type: t2.micro
       security_group: default
       network:
         assign_public_ip: true
-      image_id: "{{ item }}"
+      image_id: "{{ item.image_id }}"
       tags:
         Environment: Testing
     loop: 
-      - "ami-08a0d1e16fc3f61ea"
-      - "ami-04b70fa74e45c3917"
-      - "ami-04b70fa74e45c3917"
+      - {image_id: 'ami-08a0d1e16fc3f61ea', name: 'instance-a'}
+      - {image_id: 'ami-04b70fa74e45c3917', name: 'instance-b'}
+      - {image_id: 'ami-04b70fa74e45c3917', name: 'instance-b'}
