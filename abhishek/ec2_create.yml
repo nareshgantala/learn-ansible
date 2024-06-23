@@ -10,7 +10,7 @@
       security_group: default
       network:
         assign_public_ip: true
-      image_id: {{ item }}
+      image_id: "{{ item }}"
       tags:
         Environment: Testing
     loop: 
