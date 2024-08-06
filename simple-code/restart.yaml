@@ -8,15 +8,6 @@
         action: restartStart
         comment: "Starting Restart process"
 
-- name: Restart apache2 on app servers
-  hosts: app
-  remote_user: ubuntu
-  become: true
-  roles:
-    - role: restart2
-      vars:
-        action: restartApache2
-
 - name: Include JIRA credentials and restartComplete
   hosts: localhost
   gather_facts: false
