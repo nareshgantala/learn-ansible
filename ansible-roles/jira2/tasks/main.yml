@@ -49,5 +49,5 @@
     fields:
       resolution:
         name: Done
-      description: I am done! This is the last description I will ever give you.
+      #description: I am done! This is the last description I will ever give you.
   when: action == 'resolve'
