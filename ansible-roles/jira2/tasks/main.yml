@@ -46,7 +46,7 @@
     issue: '{{ issue_key }}'
     operation: transition
     transition:
-      id: {{ 761 }}
+      id: "{{ 761 }}"
     status: Resolved
     fields:
       resolution:
