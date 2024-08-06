@@ -70,7 +70,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ issue_key }}'
     operation: transition
-    status: Done
+    status: Change Completed
     fields:
       resolution:
         name: Done

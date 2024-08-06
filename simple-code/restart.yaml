@@ -23,6 +23,6 @@
   roles:
     - role: jira2
       vars:
-        action: restartComplete
+        action: resolve
         comment: "Restart has been completed"
       
