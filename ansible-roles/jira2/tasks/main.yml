@@ -45,9 +45,7 @@
     password: '{{ jira_creds.jira_pass }}'
     issue: '{{ issue_key }}'
     operation: transition
-    transition:
-      id: "{{ 761 }}"
-    status: Resolved
+    status: Resolve this issue
     fields:
       resolution:
         name: Done
