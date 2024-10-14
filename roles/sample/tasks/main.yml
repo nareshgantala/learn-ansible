@@ -1,3 +1,11 @@
 - name: printing from roles
   ansible.builtin.debug:
     msg: Hello From Role
+
+- name: Print variable from role
+  ansible.builtin.debug:
+    msg: URL - {{ URL }}
+
+- name: Print variable from play level variable
+  ansible.builtin.debug:
+    msg: URL_PLAY - {{ URL_PLAY }}
