@@ -16,3 +16,12 @@
         URL: task.example.com
       ansible.builtin.debug:
         msg: URL - {{ URL }}
+
+- name: Demo on loading variables from file
+  hosts: all
+  vars_files:
+    - exvars.yml
+  tasks:
+    - name: print URL from externl file
+      ansible.builtin.debug:
+        msg: URL - {{ URL }}
