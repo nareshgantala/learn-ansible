@@ -1,4 +1,4 @@
-- name: Printing URL
+- name: Demo on play level variables
   hosts: all
   vars:
     URL: play.example.com
@@ -6,3 +6,13 @@
     - name: Print URL
       ansible.builtin.debug:
         msg: Hello I am {{ URL }}
+
+
+- name: Demo on task level variables
+  hosts: all
+  tasks:
+    - name: task level variable print
+      vars:
+        URL: task.example.com
+      ansible.builtin.debug:
+        msg: URL - {{ URL }}
