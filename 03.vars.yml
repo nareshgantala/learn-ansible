@@ -37,7 +37,7 @@
   hosts: all
   tasks:
     - name: Run Uptime Shell command
-      ansible.builtin.shell: Uptime
+      ansible.builtin.shell: uptime
       register: output
     - name: debug output variable
       ansible.builtin.debug:
