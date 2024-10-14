@@ -1,0 +1,8 @@
+- name: Printing URL
+  hosts: all
+  vars:
+    URL: play.example.com
+  tasks:
+    - name: Print URL
+      ansible.builtin.debug:
+        msg: Hello I am {{ URL }}
