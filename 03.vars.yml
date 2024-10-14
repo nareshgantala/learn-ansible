@@ -25,3 +25,11 @@
     - name: print URL from externl file
       ansible.builtin.debug:
         msg: URL - {{ URL }}
+
+- name: Demo on loading variable from roles
+  hosts: all
+  vars:
+    URL_PLAY: play.example.com
+  roles:
+    - sample
+    
