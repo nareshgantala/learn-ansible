@@ -1,5 +1,5 @@
 - name: Print test.test paramaeter value
-  hosts: all
+  hosts: localhost
   tasks:
     - name: Print value
       ansible.builtin.debug:
