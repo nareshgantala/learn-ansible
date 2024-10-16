@@ -3,4 +3,4 @@
   tasks:
     - name: Print value
       ansible.builtin.debug:
-        msg: parameter - {{ lookup('aws_ssm', 'test.test', region=us-east-1) }}
+        msg: parameter - {{ lookup('amazon.aws.aws_ssm', 'test.test', region="us-east-1") }}
