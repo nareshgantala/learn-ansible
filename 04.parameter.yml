@@ -1,0 +1,6 @@
+- name: Print test.test paramaeter value
+  hosts: all
+  tasks:
+    - name: Print value
+      ansible.builtin.debug:
+        msg: "{{ lookup('amazon.aws.aws_ssm', 'test.test') }}"
